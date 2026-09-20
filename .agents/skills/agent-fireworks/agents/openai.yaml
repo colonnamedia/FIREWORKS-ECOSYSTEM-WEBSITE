@@ -1,0 +1,4 @@
+interface:
+  display_name: "AGENT FIREWORKS"
+  short_description: "Build and duplicate industry websites"
+  default_prompt: "Use $agent-fireworks to build or duplicate an industry website, commit it, and create its FIREWORKS-PROJECT.md handoff."

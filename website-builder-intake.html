@@ -324,7 +324,7 @@ textarea.ifield{resize:vertical;min-height:90px;}
   </div>
   <div class="nav">
     <button class="bback" onclick="back(4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back</button>
-    <button class="bnext fire" id="n4" onclick="submitAll()">🔥 Submit My Brief</button>
+    <button class="bnext fire" id="n4" onclick="submitAll()">Submit my brief</button>
   </div>
 </div>
 
@@ -332,7 +332,7 @@ textarea.ifield{resize:vertical;min-height:90px;}
 <div class="screen" id="s5">
   <div class="suc">
     <div class="suc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <h2 class="suc-title">You're in the system! 🔥</h2>
+    <h2 class="suc-title">Your brief is on its way.</h2>
     <p class="suc-sub">Your build brief has been sent to the FireWorks team. We'll review your answers and reach out within 24 hours to get started.</p>
     <div class="suc-xp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="17" height="17"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>375 XP Earned — Welcome to FireWorks!</div>
     <div class="sumcard" id="sumcard"></div>
@@ -359,7 +359,7 @@ function renderProg(active) {
     if (i > 0) { const l = document.createElement('div'); l.className='pline'; el.appendChild(l); }
     const p = document.createElement('div');
     p.className = 'pi ' + (i < active ? 'done' : i === active ? 'active' : 'future');
-    p.innerHTML = `<div class="pnum">${i < active ? '✓' : i+1}</div><span class="plabel">${label}</span>`;
+    p.innerHTML = `<div class="pnum">${i+1}</div><span class="plabel">${label}</span>`;
     el.appendChild(p);
   });
 }

@@ -16,11 +16,11 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: 'FireWorks Eco <noreply@fireworks-websitebuilder.com>',
       to: 'colonnamedia@gmail.com',
-      subject: `🔥 New Website Build Request — ${business || fullName}`,
+      subject: `New Website Build Request — ${business || fullName}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#f4f3ff;border-radius:12px;">
           <div style="background:#3d35c8;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
-            <h1 style="color:#fff;margin:0;font-size:18px;">🔥 New Website Build Request</h1>
+            <h1 style="color:#fff;margin:0;font-size:18px;">New Website Build Request</h1>
             <p style="color:rgba(255,255,255,.6);margin:4px 0 0;font-size:13px;">Via FireWorks Website Builder</p>
           </div>
           <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;">
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#f9f9f9;border-radius:12px;">
           <div style="background:#ef4444;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
-            <h1 style="color:#fff;margin:0;font-size:20px;">🔥 New FireWorks Eco Application</h1>
+            <h1 style="color:#fff;margin:0;font-size:20px;">New FireWorks Eco Application</h1>
           </div>
           <table style="width:100%;border-collapse:collapse;">
             <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;width:35%;font-size:13px;">Full Name</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${fullName}</td></tr>

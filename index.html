@@ -65,6 +65,50 @@
 .library-heading h2{font-size:clamp(32px,3.5vw,46px)}.library-heading p{font-size:14px}
 @media(max-width:1090px){.hero-workspace .hero-layout{grid-template-columns:1fr}.hero-copy{max-width:760px}.workspace{max-width:800px}.hero-copy h1{max-width:none}.hero-copy p{max-width:670px}}
 @media(max-width:680px){.hero-workspace{padding:38px 0 50px}.hero-workspace .hero-layout{gap:37px}.hero-copy h1{font-size:clamp(63px,15.8vw,85px);margin:20px 0}.hero-copy p{font-size:14px}.hero-proof{margin-top:26px;gap:16px}.hero-proof b{font-size:25px}.workspace{box-shadow:0 14px 35px #31232120,5px 5px 0 #e1261c}.workspace-top{padding:12px;font-size:8px}.workspace-layout{grid-template-columns:1fr}.workspace-rail{display:none}.workspace-body{padding:21px 15px 16px}.workspace-body h2{font-size:36px}.workspace-app{padding:9px;gap:9px}.workspace-app-copy strong{font-size:13px}.workspace-app-copy em{font-size:9px}.workspace-next{gap:7px;padding:11px 9px}.workspace-bottom{padding:9px 14px;font-size:8px;gap:6px}.launch-band{padding:31px 0}}
+/* Dark ecosystem direction: tool interfaces remain previews of links, not invented data. */
+:root{--red:#ec4031;--ink:#eaf8f1;--gray:#a8bcb2;--pale:#0a1914;--line:#284139;--aqua:#79f2d7}
+body{background:#07120e;color:var(--ink)}
+a:focus-visible,button:focus-visible{outline-color:var(--aqua)}
+.nav{background:#07120eee;border-bottom:1px solid #234337;backdrop-filter:blur(14px)}
+.logo{color:#f1fff8}.nav-links{color:#d9eee3}.nav-links a:hover{color:var(--aqua)}
+.nav-cta{border-color:#4a9d83;color:var(--aqua)}.hamburger{color:#edf9f3}
+.menu{background:#0b1b15;border-top-color:var(--aqua);box-shadow:0 30px 60px #0009}
+.menu-grid .launcher-app{background:#12251d;border:1px solid #305244;color:#effcf5}
+.menu-grid .launcher-app:hover{background:#1a382b;border-color:var(--aqua)}
+.menu-grid .launcher-app small{color:#a3baac}.menu-foot{color:#b5cbbd}.menu-title{color:var(--aqua)}
+.hero-workspace{background:radial-gradient(circle at 77% 28%,#145742 0,#0a2b21 24%,#06130f 57%,#050d0b 100%);position:relative;isolation:isolate}
+.hero-workspace::before{content:"";position:absolute;right:9%;top:9%;width:min(48vw,610px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#67eac13b 0,#2ac29424 34%,transparent 70%);filter:blur(10px);z-index:-1;pointer-events:none}
+.hero-copy h1{color:#f4fff9;text-shadow:0 4px 22px #0008}.hero-copy h1 em{color:var(--aqua)}
+.hero-copy p{color:#c0d5ca}.hero-proof{border-top-color:#355a48;color:#b4c9bd}.hero-proof b{color:var(--aqua)}
+.eyebrow,.kicker{color:var(--aqua)}.eyebrow::before{background:var(--aqua)}
+.btn{background:var(--aqua);color:#06251b;box-shadow:0 6px 22px #39cfaa2b}.btn:hover{filter:brightness(1.08)}
+.btn.light{background:#0b211a;border-color:#5cbb9c;color:#d4ffed;box-shadow:none}
+.workspace{background:#0c1c16d9;border-color:#5a9e81;box-shadow:0 24px 80px #0009,0 0 75px #43e7ad24,8px 8px 0 #ec4031;backdrop-filter:blur(12px)}
+.workspace-top{background:#07120f;border-bottom:1px solid #2e5745}.workspace-live{color:var(--aqua)}.workspace-dot{box-shadow:0 0 0 3px #ec40314d}
+.workspace-rail{background:#091811;border-right-color:#30533e}.workspace-rail span{color:#789484}.workspace-rail b{color:#aac4b4}
+.workspace-rail .rail-active{background:#173529;border-left-color:var(--aqua);color:var(--aqua)}.workspace-rail .rail-active b{color:#f3fff8}
+.workspace-overline{color:var(--aqua)}.workspace-body h2{color:#f2fff9}.workspace-body>p{color:#a7c1b2}
+.workspace-app{background:#142b21;border-color:#315340;color:#edf9f3;box-shadow:inset 0 1px #ffffff08}
+.workspace-app:hover{border-color:var(--aqua);background:#1b3b2c;box-shadow:0 7px 26px #3de6ad2b}
+.workspace-app-copy small,.workspace-arrow{color:var(--aqua)}.workspace-app-copy em{color:#a7c1b2}
+.workspace-next{background:#101f18;border-color:#496154;color:#99b3a3}.workspace-next strong{color:#d4e9dd}
+.workspace-bottom{background:#143b2a;border-top:1px solid #4bbf8b;color:#b4ead0}.workspace-bottom i{background:#5dbd8f}
+.speed{background:repeating-linear-gradient(110deg,var(--red) 0 90px,#07120e 90px 98px,var(--red) 98px 150px)}
+.launch-band{background:#0b211a;border-bottom-color:#294839}.launch-band h2{color:#f2fff8}.launch-band p{color:#a9c5b5}.band-actions .btn.light{background:#0c2119}
+.editorial-banner{background:#081812;border-color:#274536}.editorial-caption h2{color:#f3fff8}.editorial-caption p{color:#b3c9ba}.editorial-banner>img{filter:brightness(.77) saturate(.9)}
+.campaign-banner .editorial-caption{background:#091b14}
+.app-library{background:#07140f}.library-heading h2{color:#f3fff8}.library-heading p{color:#a9c2b2}
+.main-app-grid .launcher-app{background:#10251b;border:1px solid #2c4c39;box-shadow:inset 0 1px #ffffff0a;transition:transform .2s,border-color .2s,box-shadow .2s}
+.main-app-grid .launcher-app:hover{background:#18382a;border-color:var(--aqua);box-shadow:0 12px 35px #31d99d1a;transform:translateY(-4px)}
+.main-app-grid .unavailable:hover{background:#10251b;border-color:#2c4c39;box-shadow:none;transform:none}
+.main-app-grid .launcher-app strong{color:#f3fff8}.main-app-grid .launcher-app small{color:#a8c3b0}
+.planning-feature{background:#07140f}.planning-copy h2{color:#f3fff8}.planning-copy p{color:#adc7b6}.planning-feature img{filter:brightness(.78)}
+.seo-feature{background:#0a1c15}.seo-copy h2{color:#f4fff8}.seo-copy p,.seo-copy>small{color:#aac5b5}.seo-art{background:#10281c}.seo-art img{filter:brightness(.78)}.coming-badge{background:#173d2e;color:#a9ffe0}
+.flow{background:#0b251b;border-color:#294d3a}.flow h2{color:#f4fff8}.flow p{color:#adc8b7}
+.flow-step{background:#153428;border-top-color:var(--aqua);border-radius:7px}.flow-step b{color:var(--aqua)}.flow-step strong{color:#f3fff8}.flow-step small{color:#b5cdbd}
+.closing{background:linear-gradient(110deg,#102c20,#07130e);border-top:4px solid var(--red)}.closing h2{color:#f5fff9}.closing p{color:#a9c6b4}.closing .btn{color:#06251b;background:var(--aqua)}
+.footer{background:#06110c;border-top-color:#274334;color:#9db6a5}.footer b{color:#f1fff8}.footer a{color:var(--aqua)}
+@media(max-width:680px){.hero-workspace{background:radial-gradient(circle at 75% 47%,#134431 0,#071810 50%,#050e0a 100%)}.hero-workspace::before{top:35%;right:-30%;width:120vw}.workspace{box-shadow:0 14px 38px #0009,5px 5px 0 #ec4031}.workspace-top{background:#06140e}.workspace-rail{display:none}}
 </style>
 </head>
 <body>

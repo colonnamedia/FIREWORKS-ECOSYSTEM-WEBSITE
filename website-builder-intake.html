@@ -444,7 +444,8 @@ const LAYOUTS = [
 
 // ── SUBMIT ────────────────────────────────────────────────────
 async function submitAll() {
-  xp += 75; updateXP();
+  const submitButton = document.getElementById('n4');
+  if (submitButton.disabled) return;
   S.phone = document.getElementById('i-phone').value;
   S.notes = document.getElementById('i-notes').value;
 
@@ -465,10 +466,9 @@ async function submitAll() {
     `<div class="sumrow"><span class="sumkey">${k}</span><span class="sumval${k==='Admin Email'?' hi':''}">${v}</span></div>`
   ).join('');
 
-  show(5); renderProg(5);
-
+  submitButton.disabled = true;
   try {
-    await fetch('/api/contact', {
+    const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -481,7 +481,14 @@ async function submitAll() {
         layout: S.layout, notes: S.notes,
       })
     });
-  } catch(e) { console.log('submit error', e); }
+    if (!response.ok) throw new Error('Submission failed');
+    xp += 75; updateXP();
+    show(5); renderProg(5);
+  } catch {
+    alert('We couldn’t send your brief. Please try again.');
+  } finally {
+    submitButton.disabled = false;
+  }
 }
 
 // ── INIT ──────────────────────────────────────────────────────

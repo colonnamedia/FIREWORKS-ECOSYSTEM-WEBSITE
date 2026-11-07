@@ -1,19 +1,38 @@
 import { Resend } from 'resend';
 
-const resend = new Resend('re_Jxr3ePGT_PYdHgueHT32EoN2VwkEaKPaP');
+async function sendFormEmail(res, message) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error('RESEND_API_KEY is missing');
+    return res.status(503).json({ error: 'Email delivery is unavailable' });
+  }
+
+  try {
+    const resend = new Resend(apiKey);
+    const { data, error } = await resend.emails.send(message);
+    if (error || !data?.id) {
+      console.error('Resend rejected form email:', error?.name ?? 'missing_message_id');
+      return res.status(502).json({ error: 'Failed to send email' });
+    }
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Resend request failed:', error?.name);
+    return res.status(502).json({ error: 'Failed to send email' });
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const body = req.body;
+  const body = req.body ?? {};
 
   // ── WEBSITE BUILDER INTAKE ──
   if (body.type === 'website-builder') {
     const { fullName, email, siteType, goals, industry, vibe, business, phone, adminEmail, layout, notes } = body;
 
-    await resend.emails.send({
+    return sendFormEmail(res, {
       from: 'FireWorks Eco <noreply@fireworks-websitebuilder.com>',
       to: 'colonnamedia@gmail.com',
       subject: `New Website Build Request — ${business || fullName}`,
@@ -42,8 +61,6 @@ export default async function handler(req, res) {
         </div>
       `,
     });
-
-    return res.status(200).json({ success: true });
   }
 
   // ── CAREERS APPLICATION ──
@@ -53,33 +70,26 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  try {
-    await resend.emails.send({
-      from: 'FireWorks Eco <noreply@fireworks-websitebuilder.com>',
-      to: 'colonnamedia@gmail.com',
-      subject: `New Application: ${fullName} — ${position}`,
-      html: `
-        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#f9f9f9;border-radius:12px;">
-          <div style="background:#ef4444;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
-            <h1 style="color:#fff;margin:0;font-size:20px;">New FireWorks Eco Application</h1>
-          </div>
-          <table style="width:100%;border-collapse:collapse;">
-            <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;width:35%;font-size:13px;">Full Name</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${fullName}</td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Email</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;"><a href="mailto:${email}">${email}</a></td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Phone</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${phone || 'Not provided'}</td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Position</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${position}</td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Experience</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${experience || 'Not provided'}</td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Portfolio</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${portfolio || 'Not provided'}</td></tr>
-          </table>
-          ${whyJoin ? `<div style="margin-top:20px;"><p style="font-weight:600;color:#666;margin-bottom:8px;font-size:13px;">Why FireWorks Eco:</p><div style="background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:14px;color:#333;line-height:1.6;font-size:13px;">${whyJoin}</div></div>` : ''}
-          <p style="margin-top:24px;font-size:12px;color:#999;text-align:center;">Sent via FireWorks Eco careers page</p>
+  return sendFormEmail(res, {
+    from: 'FireWorks Eco <noreply@fireworks-websitebuilder.com>',
+    to: 'colonnamedia@gmail.com',
+    subject: `New Application: ${fullName} — ${position}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#f9f9f9;border-radius:12px;">
+        <div style="background:#ef4444;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
+          <h1 style="color:#fff;margin:0;font-size:20px;">New FireWorks Eco Application</h1>
         </div>
-      `,
-    });
-
-    return res.status(200).json({ success: true });
-  } catch (error) {
-    console.error('Resend error:', error);
-    return res.status(500).json({ error: 'Failed to send email' });
-  }
+        <table style="width:100%;border-collapse:collapse;">
+          <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;width:35%;font-size:13px;">Full Name</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${fullName}</td></tr>
+          <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Email</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;"><a href="mailto:${email}">${email}</a></td></tr>
+          <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Phone</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${phone || 'Not provided'}</td></tr>
+          <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Position</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${position}</td></tr>
+          <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Experience</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${experience || 'Not provided'}</td></tr>
+          <tr><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-weight:600;color:#666;font-size:13px;">Portfolio</td><td style="padding:10px 0;border-bottom:1px solid #e5e5e5;font-size:13px;">${portfolio || 'Not provided'}</td></tr>
+        </table>
+        ${whyJoin ? `<div style="margin-top:20px;"><p style="font-weight:600;color:#666;margin-bottom:8px;font-size:13px;">Why FireWorks Eco:</p><div style="background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:14px;color:#333;line-height:1.6;font-size:13px;">${whyJoin}</div></div>` : ''}
+        <p style="margin-top:24px;font-size:12px;color:#999;text-align:center;">Sent via FireWorks Eco careers page</p>
+      </div>
+    `,
+  });
 }

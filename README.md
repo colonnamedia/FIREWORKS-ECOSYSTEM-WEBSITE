@@ -67,7 +67,7 @@ fireworks-eco/
 
 ## Email System
 - **Provider:** Resend
-- **API Key:** Stored in `api/contact.js`
+- **API Key:** `RESEND_API_KEY` in Vercel’s Production environment variables
 - **From:** `noreply@fireworks-websitebuilder.com`
 - **To:** `colonnamedia@gmail.com`
 - **Handles two form types:**
@@ -124,7 +124,6 @@ On submit: sends full brief to `colonnamedia@gmail.com` via `/api/contact`
 - [ ] Add Pittsburgh fireworks image to repo root (or keep base64)
 - [ ] Wire up SEO Engine when built
 - [ ] Verify Resend domain `fireworks-websitebuilder.com` stays verified
-- [ ] Consider moving Resend API key to Vercel environment variable
 - [ ] Meta retargeting campaign for Punch Boxing (separate project)
 - [ ] punchpgh.com Astro rebuild (separate project)
 
